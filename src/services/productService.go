@@ -1,4 +1,4 @@
-package src
+package services
 
 import (
 	"EBS_go/src/models"
@@ -6,17 +6,16 @@ import (
 	"net/http"
 )
 
-func getProducts(c echo.Context) {
+func GetProducts(c echo.Context) error {
 	var products []models.Products
-	err := c.Bind(&products)
-	if err != nil {
-		return c.String(http.StatusNotFound, "Not Found")
+	if products == nil || len(products) == 0 {
+		return echo.NewHTTPError(http.StatusNotFound, "Products not found")
 	}
 
 	return c.JSON(http.StatusOK, products)
 }
 
-func getProduct(c echo.Context) {
+func GetProduct(c echo.Context) error {
 	var product models.Products
 	err := c.Bind(&product)
 	if err != nil {
@@ -26,7 +25,7 @@ func getProduct(c echo.Context) {
 	return c.JSON(http.StatusOK, product)
 }
 
-func postProducts(c echo.Context) {
+func PostProducts(c echo.Context) error {
 	var product = new(models.Products)
 	err := c.Bind(&product)
 	if err != nil {
@@ -36,7 +35,7 @@ func postProducts(c echo.Context) {
 	return c.JSON(http.StatusCreated, product)
 }
 
-func putProducts(c echo.Context) {
+func PutProducts(c echo.Context) error {
 	var product models.Products
 	err := c.Bind(&product)
 	if err != nil {
@@ -46,7 +45,7 @@ func putProducts(c echo.Context) {
 	return c.JSON(http.StatusOK, product)
 }
 
-func deleteProduct(c echo.Context) {
+func DeleteProduct(c echo.Context) error {
 	var product models.Products
 	err := c.Bind(&product)
 	if err != nil {

@@ -1,6 +1,7 @@
 package main
 
 import (
+	"EBS_go/src/routes"
 	"github.com/labstack/echo/v4"
 	"net/http"
 )
@@ -10,10 +11,6 @@ func main() {
 	e.GET("/", func(c echo.Context) error {
 		return c.String(http.StatusOK, "Hello, World!")
 	})
-	e.GET("/products", getProducts)
-	e.GET("/products/:id", getProduct)
-	e.POST("/products", postProducts)
-	e.PUT("/products/:id", putProducts)
-	e.DELETE("/products/:id", deleteProduct)
+	routes.InitProductRoutes(e)
 	e.Logger.Fatal(e.Start(":1323"))
 }
