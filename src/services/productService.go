@@ -18,6 +18,7 @@ func GetProducts(c echo.Context) error {
 func GetProduct(c echo.Context) error {
 	var product models.Products
 	err := c.Bind(&product)
+
 	if err != nil {
 		return c.String(http.StatusNotFound, "Not Found")
 	}
