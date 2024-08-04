@@ -9,7 +9,7 @@ import (
 func GetProducts(c echo.Context) error {
 	var products []models.Products
 	if products == nil || len(products) == 0 {
-		return echo.NewHTTPError(http.StatusNotFound, "Products not found")
+		return c.JSON(http.StatusOK, products)
 	}
 
 	return c.JSON(http.StatusOK, products)
